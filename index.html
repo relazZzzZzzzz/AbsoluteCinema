@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absolute Cinema</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon.svg" type="image/x-icon">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="header__logo" id="logo">
+                    <img src="images/Absolute Cinema.svg" alt="Absolute Cinema" onerror="this.src='https://placehold.co/200x48/5454D4/white?text=ABSOLUTE+CINEMA'">
+                </div>
+
+                <div class="header__search">
+                    <div class="search">
+                        <input type="text" class="search__input" id="searchInput" placeholder="Поиск фильмов, актёров, жанров...">
+                        <button class="search__clear" id="searchClear">✕</button>
+                    </div>
+                    <div class="search__suggestions" id="searchSuggestions"></div>
+                </div>
+
+                <ul class="header__nav">
+                    <li><a href="#" class="header__link" id="myTicketsLink">Мои билеты</a></li>
+                </ul>
+
+                <div class="header__auth" id="authBlock"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main" id="mainContent"></main>
+
+    <!-- Модалка авторизации -->
+    <div class="modal" id="authModal">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title" id="modalTitle">Вход в аккаунт</h2>
+                <button class="modal__close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal__body">
+                <div class="error-message" id="errorMessage"></div>
+                <form id="loginForm" class="form form--login active">
+                    <input type="text" class="form__input" id="loginUsername" placeholder="Имя пользователя">
+                    <input type="password" class="form__input" id="loginPassword" placeholder="Пароль">
+                    <button type="submit" class="btn btn--primary btn--full">Войти</button>
+                    <p class="form__switch">Нет аккаунта? <a href="#" id="switchToRegister">Зарегистрироваться</a></p>
+                </form>
+                <form id="registerForm" class="form form--register">
+                    <input type="text" class="form__input" id="regUsername" placeholder="Имя пользователя">
+                    <input type="password" class="form__input" id="regPassword" placeholder="Пароль">
+                    <input type="password" class="form__input" id="regConfirmPassword" placeholder="Подтвердите пароль">
+                    <button type="submit" class="btn btn--primary btn--full">Зарегистрироваться</button>
+                    <p class="form__switch">Уже есть аккаунт? <a href="#" id="switchToLogin">Войти</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка покупки билетов -->
+    <div class="buy-modal" id="buyModal">
+        <div class="buy-modal__content">
+            <h2 class="buy-modal__title" id="buyModalTitle">Выбор места</h2>
+            <div id="seatsContainer"></div>
+            <div class="payment-methods" id="paymentMethods"></div>
+            <div class="total-price" id="totalPrice">Итого: 0 ₽</div>
+            <div class="buy-modal__actions">
+                <button class="btn btn--outline" id="cancelBuyBtn">Отмена</button>
+                <button class="btn btn--primary" id="confirmBuyBtn">Подтвердить покупку</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка пополнения баланса -->
+    <div class="topup-modal" id="topupModal">
+        <div class="topup-modal__content">
+            <h2 class="topup-modal__title">Пополнение баланса</h2>
+            <input type="number" class="topup-modal__input" id="topupAmount" placeholder="Введите сумму" min="1">
+            <div class="topup-modal__actions">
+                <button class="btn btn--outline" id="cancelTopupBtn">Отмена</button>
+                <button class="btn btn--primary" id="confirmTopupBtn">Пополнить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка подтверждения пополнения -->
+    <div class="confirm-modal" id="confirmModal">
+        <div class="confirm-modal__content">
+            <h2 class="confirm-modal__title">💰 Недостаточно средств</h2>
+            <p class="confirm-modal__text">Ваш баланс: <span id="currentBalance"></span> ₽<br>Нужно: <span id="neededAmount"></span> ₽</p>
+            <div class="confirm-modal__actions">
+                <button class="btn btn--outline" id="confirmLaterBtn">Позже</button>
+                <button class="btn btn--primary" id="confirmYesBtn">Да, пополнить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомления -->
+    <div class="alert" id="alertMessage">
+        <div class="alert__content">
+            <span class="alert__icon">⚠️</span>
+            <p class="alert__text"></p>
+            <button class="alert__close">✕</button>
+        </div>
+    </div>
+
+    <div class="toast" id="successToast">
+        <div class="toast__content">
+            <span>✅</span>
+            <div class="toast__text">Билет успешно куплен!</div>
+            <button class="toast__close">✕</button>
+        </div>
+    </div>
+
+    <div class="toast" id="ticketsToast">
+        <div class="toast__content">
+            <span>🎫</span>
+            <div class="toast__text">Войдите в аккаунт, чтобы смотреть билеты</div>
+            <button class="toast__close">✕</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
